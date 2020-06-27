@@ -92,6 +92,7 @@ public static class GenConfig
         // 其它
         typeof(PlayerPrefs),
         typeof(System.GC),
+        typeof(AsyncOperation),
     };
 
     //C#静态调用Lua的配置（包括事件的原型），仅可以配delegate，interface
@@ -107,7 +108,11 @@ public static class GenConfig
         typeof(System.Collections.IEnumerator),
         typeof(UnityEngine.Events.UnityAction<Vector2>),
     };
-
+    // 避免在IL2CPP下被裁剪
+    [ReflectionUse]
+    public static List<Type> ReflectionUse = new List<Type>(){
+        typeof(AsyncOperation),
+    };
 	//黑名单
 	[BlackList]
 	public static List<List<string>> BlackList = new List<List<string>>()  {
